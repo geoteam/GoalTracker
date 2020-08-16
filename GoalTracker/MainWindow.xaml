@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoalTracker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="GoalTracker" Height="450" Width="800">
+   <Grid>
+      <Grid Margin="590,0,0.333,-0.333">
+         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+      </Grid>
+   </Grid>
 </Window>
