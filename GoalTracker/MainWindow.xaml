@@ -4,11 +4,54 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoalTracker"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="GoalTracker" Height="450" Width="800">
-   <Grid>
-      <Grid Margin="590,0,0.333,-0.333">
-         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-      </Grid>
+        Title="GoalTracker" Height="640" Width="800">
+   <Grid x:Name="mainGrid">
+      <Grid.Resources>
+         <local:ColWidthConverter x:Key="ColWidthConverter"/>
+         <sys:Int32 x:Key="Value">75</sys:Int32>
+         
+         <Style x:Key="lineStyle" TargetType="Line">
+            <Setter Property="Stroke" Value="Gray" />
+            <Setter Property="Stretch" Value="Fill" />
+            <Setter Property="Grid.ZIndex" Value="100" />
+            <Setter Property="StrokeDashArray" Value="1,2" />
+         </Style>
+
+         <Style x:Key="horizontalLineStyle" TargetType="Line" BasedOn="{StaticResource lineStyle}">
+            <Setter Property="X2" Value="1" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="Grid.ColumnSpan" 
+                    Value="{Binding   
+                                Path=ColumnDefinitions.Count,  
+                                RelativeSource={RelativeSource AncestorType=Grid}}"/>
+         </Style>
+
+         <Style x:Key="verticalLineStyle" TargetType="Line" BasedOn="{StaticResource lineStyle}">
+            <Setter Property="Y2" Value="1" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Grid.RowSpan"   
+                    Value="{Binding   
+                                Path=RowDefinitions.Count,  
+                                RelativeSource={RelativeSource AncestorType=Grid}}"/>
+         </Style>
+      </Grid.Resources>
+      
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition>
+            <ColumnDefinition.Width>
+               <MultiBinding Converter="{StaticResource ColWidthConverter}">
+                  <Binding Path=""/>
+                  <Binding Path="ActualWidth" ElementName="mainGrid"/>
+               </MultiBinding>
+            </ColumnDefinition.Width>
+         </ColumnDefinition>
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+      </Grid.RowDefinitions>
+
+      <Line Grid.Column="0" Style="{StaticResource verticalLineStyle}"/>
    </Grid>
 </Window>
